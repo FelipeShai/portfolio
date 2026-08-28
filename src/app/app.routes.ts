@@ -17,6 +17,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'blog/cloneable-java-deep-copy',
+    loadComponent: () =>
+      import('./features/blog/chapters/cloneable-java-deep-copy/cloneable-java-deep-copy').then(
+        (m) => m.CloneableJavaDeepCopy,
+      ),
+  },
+  {
     path: 'blog/:slug',
     loadComponent: () => import('./features/blog/blog-post/blog-post').then((m) => m.BlogPost),
   },

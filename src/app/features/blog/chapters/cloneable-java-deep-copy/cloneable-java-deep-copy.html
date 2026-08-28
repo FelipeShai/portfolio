@@ -1,0 +1,165 @@
+<div class="cl-page">
+  <a class="back-link" routerLink="/blog">← Voltar para o blog</a>
+
+  <div class="page">
+    <header class="opener single">
+      <span class="eyebrow book-eyebrow">Java · Boas práticas</span>
+      <h1>Cloneable no Java: shallow copy, deep copy e por quê evitar</h1>
+      <div class="source">
+        Por que a interface <code>Cloneable</code> é desencorajada por especialistas como Joshua Bloch e Brian
+        Goetz, e o que usar no lugar dela.
+      </div>
+    </header>
+
+    <p class="thesis">
+      Clonar um objeto em Java parece simples.
+      <span
+        >Na prática, exige escolher entre shallow copy e deep copy, e a interface pensada pra isso,
+        <code>Cloneable</code>, é considerada quebrada pelos próprios arquitetos da linguagem.</span
+      >
+    </p>
+
+    <section>
+      <span class="eyebrow">Duas abordagens</span>
+      <h2>Shallow Copy (Cópia Rasa)</h2>
+      <p>Apenas copia as referências dos objetos internos, sem criar novas instâncias.</p>
+      <p>Problema:</p>
+      <ul class="plain">
+        <li>Objetos internos continuam compartilhados entre a cópia e o original.</li>
+        <li>Qualquer modificação pode afetar ambos, resultando em efeitos colaterais inesperados.</li>
+      </ul>
+
+      <h3>Deep Copy (Cópia Profunda)</h3>
+      <p>Cria novas instâncias para todos os objetos internos, garantindo independência entre cópia e original.</p>
+      <p>Vantagens:</p>
+      <ul class="plain">
+        <li>Alterações na cópia não afetam o original.</li>
+        <li>Evita compartilhamento indesejado de referências.</li>
+      </ul>
+    </section>
+
+    <section>
+      <span class="eyebrow">O problema</span>
+      <h2>Problemas com Cloneable</h2>
+      <p>
+        A interface <code>Cloneable</code> no Java foi mal projetada e é amplamente desencorajada por especialistas
+        como Joshua Bloch e Brian Goetz, além da própria documentação oficial do Java. Principais problemas:
+      </p>
+      <ul class="plain">
+        <li>Não fornece um método <code>clone()</code>, tornando seu uso inconsistente.</li>
+        <li>
+          <code>super.clone()</code> faz apenas uma cópia rasa (shallow copy), podendo causar efeitos colaterais
+          imprevisíveis.
+        </li>
+        <li>Quebra encapsulamento, pois cria objetos sem chamar o construtor.</li>
+        <li>Objetos internos mutáveis podem ser compartilhados indevidamente, levando a bugs difíceis de rastrear.</li>
+        <li>Melhores alternativas existem, como construtores de cópia e métodos de fábrica.</li>
+      </ul>
+    </section>
+
+    <section>
+      <span class="eyebrow">Quatro vozes, um consenso</span>
+      <h2>O que dizem os especialistas</h2>
+      <p>Os especialistas seguem uma linha consistente: evitar Cloneable e preferir alternativas mais seguras.</p>
+
+      <div class="cards">
+        <div class="card">
+          <p class="who">Joshua Bloch</p>
+          <p class="what">Effective Java (3ª edição, 2018), Item 13</p>
+          <p class="quote">
+            The resulting mechanism is fragile, dangerous, and extralinguistic: it creates objects without calling a
+            constructor.
+          </p>
+          <p class="gloss">Recomenda construtores de cópia ou métodos de fábrica como alternativa mais segura.</p>
+          <p class="source-link">
+            <a href="https://www.oreilly.com/library/view/effective-java-3rd/9780134686097/" target="_blank" rel="noreferrer"
+              >Ver fonte ↗</a
+            >
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Joshua Bloch</p>
+          <p class="what">Entrevista para Bill Venners</p>
+          <p class="quote">Clone is deeply broken.</p>
+          <p class="gloss">
+            <code>super.clone()</code> compartilha estado entre objetos clonados; se esse estado for mutável, o
+            comportamento fica imprevisível.
+          </p>
+          <p class="source-link">
+            <a href="https://www.artima.com/articles/joshua-bloch-on-design#part13" target="_blank" rel="noreferrer"
+              >Ver fonte ↗</a
+            >
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Documentação oficial</p>
+          <p class="what">Java 11 API: Cloneable</p>
+          <p class="quote">
+            By convention, classes that implement Cloneable should override Object.clone() with a public method.
+          </p>
+          <p class="gloss">
+            Sem implementar <code>Cloneable</code>, chamar <code>clone()</code> lança
+            <code>CloneNotSupportedException</code>: não há garantia de comportamento consistente.
+          </p>
+          <p class="source-link">
+            <a
+              href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Cloneable.html"
+              target="_blank"
+              rel="noreferrer"
+              >Ver fonte ↗</a
+            >
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Brian Goetz</p>
+          <p class="what">Arquiteto de linguagem Java, Oracle</p>
+          <p class="quote">The standard advice for Cloneable is just write a copy constructor instead.</p>
+          <p class="gloss">
+            Reforça que um construtor de cópia é a abordagem correta, inclusive para <code>record</code>s.
+          </p>
+          <p class="source-link">
+            <a
+              href="https://stackoverflow.com/questions/67334593/is-it-okay-to-make-a-record-cloneable"
+              target="_blank"
+              rel="noreferrer"
+              >Ver fonte ↗</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="callout teal">
+      <span class="law-label">A recomendação prática</span>
+      <p class="law-statement">Prefira um construtor de cópia a Cloneable.</p>
+      <p>
+        Cloneable é um mecanismo falho e deve ser evitado. Os próprios criadores e arquitetos do Java recomendam não
+        usá-lo e preferir abordagens mais seguras:
+      </p>
+      <ul class="plain">
+        <li><strong>Construtores de cópia:</strong> garantem uma cópia controlada e previsível.</li>
+        <li><strong>Métodos de fábrica (<code>copy()</code>):</strong> melhor prática para testes e produção.</li>
+        <li><strong>MapStruct:</strong> automação eficiente para cópias profundas de objetos complexos.</li>
+      </ul>
+    </div>
+
+    <section class="synthesis">
+      <span class="eyebrow">Como as peças se encaixam</span>
+      <h2>Síntese</h2>
+      <p>
+        Shallow copy compartilha referências entre cópia e original → deep copy isola o estado, mas dá mais trabalho
+        para implementar → Cloneable promete resolver isso automaticamente, mas quebra encapsulamento e não garante
+        comportamento consistente → por isso Bloch, Goetz e a própria documentação do Java recomendam abandoná-lo em
+        favor de construtores de cópia ou métodos de fábrica.
+      </p>
+    </section>
+
+    <footer class="colophon">
+      <span>Cloneable no Java, shallow copy vs. deep copy</span>
+      <span>Fontes: Effective Java, entrevistas e documentação oficial</span>
+    </footer>
+  </div>
+</div>
