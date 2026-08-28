@@ -205,6 +205,97 @@
   color: var(--accent);
 }
 
+/* ---------- Command reference blocks ---------- */
+.cl-page .command-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin: 1rem 0 1.6rem;
+}
+@media (max-width: 620px) {
+  .cl-page .command-block {
+    grid-template-columns: 1fr;
+  }
+}
+.cl-page .command-item {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.8rem 0.7rem 0.8rem 1rem;
+  box-shadow: var(--shadow);
+}
+.cl-page .command-item .cmd-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.cl-page .command-item .cmd {
+  display: block;
+  min-width: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.86rem;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.cl-page .command-item .cmd::before {
+  content: '$ ';
+  color: var(--accent);
+  font-weight: 600;
+}
+.cl-page .command-item .command-description {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.cl-page .copy-btn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink-faint);
+  cursor: pointer;
+}
+.cl-page .copy-btn:hover {
+  color: var(--accent);
+  border-color: var(--rule);
+  background: var(--paper);
+}
+.cl-page .copy-btn.copied {
+  color: var(--teal);
+  border-color: var(--teal-soft);
+  background: var(--paper);
+}
+.cl-page .copy-btn svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+.cl-page .copy-btn .icon-check {
+  display: none;
+}
+.cl-page .copy-btn.copied .icon-copy {
+  display: none;
+}
+.cl-page .copy-btn.copied .icon-check {
+  display: inline-flex;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cl-page .copy-btn {
+    transition:
+      background 0.15s ease,
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+}
+
 /* ---------- Mini chart ---------- */
 .cl-page .chart-block {
   display: grid;

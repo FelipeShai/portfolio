@@ -1,0 +1,188 @@
+<ng-template #commandItem let-c>
+  <div class="command-item">
+    <div class="cmd-row">
+      <code class="cmd">{{ c.command }}</code>
+      <button
+        type="button"
+        class="copy-btn"
+        [class.copied]="copiedCommand() === c.command"
+        (click)="copyCommand(c.command)"
+        [attr.aria-label]="copiedCommand() === c.command ? 'Comando copiado' : 'Copiar comando'"
+      >
+        <svg class="icon-copy" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" />
+          <path
+            d="M13 7V4.5A1.5 1.5 0 0 0 11.5 3h-7A1.5 1.5 0 0 0 3 4.5v7A1.5 1.5 0 0 0 4.5 13H7"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </svg>
+        <svg class="icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path
+            d="M4 10.5l3.5 3.5L16 5.5"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+    <p class="command-description">{{ c.description }}</p>
+  </div>
+</ng-template>
+
+<div class="cl-page">
+  <a class="back-link" routerLink="/blog">← Voltar para o blog</a>
+
+  <div class="page">
+    <header class="opener single">
+      <span class="eyebrow book-eyebrow">Linux · Terminal · CLI</span>
+      <h1>Comandos Linux essenciais para navegar, administrar e resolver no terminal</h1>
+      <div class="source">
+        Um guia de referência rápida com os comandos que mais aparecem no dia a dia: arquivos, pacotes, processos,
+        rede, compactação e permissões.
+      </div>
+    </header>
+
+    <p class="thesis">
+      O terminal do Linux tem fama de complicado.
+      <span
+        >Na prática, o dia a dia se resume a um punhado de comandos que se repetem: navegar, inspecionar, instalar,
+        monitorar e corrigir.</span
+      >
+    </p>
+
+    <section>
+      <span class="eyebrow">Fundamentos</span>
+      <h2>Navegação e arquivos</h2>
+      <p>Comandos básicos para se localizar e manipular arquivos e pastas.</p>
+      <div class="command-block">
+        @for (c of navegacaoCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <div class="callout">
+      <span class="law-label">Atenção</span>
+      <p class="law-statement">Comandos destrutivos não têm lixeira.</p>
+      <p>
+        <code>rm -r</code>, <code>chmod</code>, <code>chown</code> e <code>dd</code> alteram ou apagam de forma
+        definitiva. Antes de rodar qualquer um deles, confirme o caminho com <code>pwd</code> e <code>ls -la</code>,
+        e pense duas vezes ao usar <code>sudo</code>.
+      </p>
+    </div>
+
+    <section>
+      <span class="eyebrow">Gerenciamento de pacotes</span>
+      <h2>Pacotes e programas (APT)</h2>
+      <p>Em distribuições baseadas em Debian e Ubuntu, o APT é o gerenciador de pacotes padrão.</p>
+      <div class="command-block">
+        @for (c of aptCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Inspeção</span>
+      <h2>Busca e leitura de arquivos</h2>
+      <p>Ferramentas para inspecionar e buscar em arquivos sem editor gráfico.</p>
+      <div class="command-block">
+        @for (c of buscaCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Monitoramento</span>
+      <h2>Sistema, processos e serviços</h2>
+      <p>Comandos para monitorar recursos, processos em execução e a saúde do sistema.</p>
+      <div class="command-block">
+        @for (c of sistemaCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+
+      <h3>Serviços com systemd</h3>
+      <div class="command-block">
+        @for (c of systemdCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Conectividade</span>
+      <h2>Rede e conexão remota</h2>
+      <p>Para checar conectividade, baixar arquivos e acessar outras máquinas.</p>
+      <div class="command-block">
+        @for (c of redeCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Arquivamento</span>
+      <h2>Compactação e backup</h2>
+      <p>Para empacotar pastas antes de mover, enviar ou guardar.</p>
+      <div class="command-block">
+        @for (c of compactacaoCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Controle de acesso</span>
+      <h2>Permissões e sudo</h2>
+      <p>Controle de acesso, privilégios e permissões de arquivos.</p>
+      <div class="command-block">
+        @for (c of permissoesCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">Atalhos</span>
+      <h2>Extras úteis para produtividade</h2>
+      <p>Atalhos e truques que aceleram o trabalho diário no terminal.</p>
+      <div class="command-block">
+        @for (c of produtividadeCommands; track c.command) {
+          <ng-container [ngTemplateOutlet]="commandItem" [ngTemplateOutletContext]="{ $implicit: c }" />
+        }
+      </div>
+    </section>
+
+    <div class="callout teal">
+      <span class="law-label">Antes de procurar na internet</span>
+      <p class="law-statement">
+        <code>man comando</code> e <code>comando --help</code> geralmente têm a resposta mais confiável.
+      </p>
+      <p>
+        A documentação embutida no sistema é específica da versão instalada, o que evita boa parte das respostas
+        desatualizadas encontradas em fóruns.
+      </p>
+    </div>
+
+    <section class="synthesis">
+      <span class="eyebrow">Como as peças se encaixam</span>
+      <h2>Síntese</h2>
+      <p>
+        Este conjunto cobre o fluxo típico de quem administra um sistema Linux pelo terminal: navegar e manipular
+        arquivos → instalar e manter pacotes → inspecionar conteúdo → monitorar processos e serviços → verificar a
+        rede → compactar dados → controlar permissões. Comandos de remoção, permissões e serviços merecem atenção
+        extra: são os que mais causam dor de cabeça quando usados sem cuidado.
+      </p>
+    </section>
+
+    <footer class="colophon">
+      <span>Comandos Linux essenciais</span>
+      <span>Fontes: GNU Coreutils, APT e documentação do systemd</span>
+    </footer>
+  </div>
+</div>

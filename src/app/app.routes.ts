@@ -24,6 +24,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'blog/comandos-linux-essenciais-terminal',
+    loadComponent: () =>
+      import(
+        './features/blog/chapters/comandos-linux-essenciais-terminal/comandos-linux-essenciais-terminal'
+      ).then((m) => m.ComandosLinuxEssenciaisTerminal),
+  },
+  {
     path: 'blog/:slug',
     loadComponent: () => import('./features/blog/blog-post/blog-post').then((m) => m.BlogPost),
   },
