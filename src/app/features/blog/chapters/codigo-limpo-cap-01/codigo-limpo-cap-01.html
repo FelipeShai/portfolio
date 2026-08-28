@@ -1,0 +1,228 @@
+<div class="cl-page">
+  <a class="back-link" routerLink="/blog">← Voltar para o blog</a>
+
+  <div class="page">
+    <header class="opener">
+      <div class="chapter-num">1</div>
+      <div class="eyebrow book-eyebrow">Robert C. Martin · Série Robert C. Martin</div>
+      <h1>Código Limpo</h1>
+      <div class="source">
+        Resumo conceitual do Capítulo 1 de <em>Código Limpo: Habilidades Práticas do Agile Software</em>
+      </div>
+    </header>
+
+    <p class="thesis">
+      O código nunca vai desaparecer.
+      <span>Por isso, escrevê-lo bem e mantê-lo limpo continuamente é a habilidade profissional mais fundamental de um programador.</span>
+    </p>
+
+    <section>
+      <span class="eyebrow">Ponto de partida</span>
+      <h2>Sempre haverá código</h2>
+      <p>
+        Martin abre rejeitando a ideia de que ferramentas de alto nível ou geração automática algum dia eliminarão a
+        programação. Especificar requisitos com o detalhe suficiente para que uma máquina os execute
+        <em class="term">é</em> programar, e essa especificação, por mais alto nível que a linguagem se torne,
+        continuará sendo código. Não há atalho que escape da precisão que só o código oferece.
+      </p>
+    </section>
+
+    <section>
+      <span class="eyebrow">O problema</span>
+      <h2>O custo de ter um código confuso</h2>
+      <p>
+        Todo programador com alguns anos de estrada já foi retardado por código ruim (o próprio ou o alheio). Martin
+        descreve o padrão: cada alteração passa a quebrar outras duas ou três partes do sistema; nada é trivial; a
+        bagunça cresce até não ser mais possível arrumá-la. Conforme a confusão aumenta, a produtividade despenca em
+        direção a zero. A reação da gerência (contratar mais gente) só acelera a queda, porque os recém-chegados
+        não distinguem uma mudança que ajuda de uma que atrapalha.
+      </p>
+
+      <div class="chart-block">
+        <svg
+          viewBox="0 0 220 150"
+          role="img"
+          aria-label="Gráfico mostrando produtividade caindo assintoticamente para perto de zero conforme o tempo passa e o código fica mais confuso"
+        >
+          <line x1="30" y1="10" x2="30" y2="130" stroke="var(--rule)" stroke-width="1" />
+          <line x1="30" y1="130" x2="210" y2="130" stroke="var(--rule)" stroke-width="1" />
+          <text x="14" y="16" font-family="IBM Plex Mono, monospace" font-size="7" fill="var(--ink-faint)">100</text>
+          <text x="20" y="132" font-family="IBM Plex Mono, monospace" font-size="7" fill="var(--ink-faint)">0</text>
+          <text
+            x="95"
+            y="145"
+            font-family="IBM Plex Mono, monospace"
+            font-size="7"
+            letter-spacing="0.08em"
+            fill="var(--ink-faint)"
+          >
+            TEMPO
+          </text>
+          <path
+            d="M 30 15 C 70 20, 85 90, 110 112 C 140 128, 170 132, 210 133"
+            fill="none"
+            stroke="var(--accent)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+        <div class="chart-caption">
+          <span class="fig-label">Figura 1.1 do livro</span>
+          Produtividade × tempo. À medida que o código se torna mais confuso, a produtividade da equipe cai
+          assintoticamente para perto de zero; nunca chega a zero, mas, para todos os efeitos práticos, o time trava.
+        </div>
+      </div>
+
+      <h3>O Grande Replanejamento</h3>
+      <p>
+        A equipe se rebela, a gerência cede, e nasce um time novo para reescrever tudo do zero, enquanto o sistema
+        antigo continua precisando de manutenção. As duas equipes entram numa corrida que pode durar anos; quando o
+        novo sistema finalmente alcança o antigo, os membros originais já foram embora e o ciclo de degradação
+        recomeça.
+      </p>
+
+      <h3>Atitude</h3>
+      <p>
+        Martin recusa as desculpas de sempre: prazos curtos, requisitos que mudam, gerentes e clientes difíceis.
+        <strong>A responsabilidade pela bagunça é nossa.</strong> Cabe ao programador, como profissional, defender o
+        código com a mesma paixão com que gerentes defendem prazos, inclusive dizendo não quando ceder significa
+        produzir uma zona.
+      </p>
+    </section>
+
+    <div class="callout">
+      <span class="law-label">Citada por Kent Beck</span>
+      <p class="law-statement">"Depois" é igual a nunca: a Lei de LeBlanc</p>
+      <p>
+        Ilustrando por que código ruim se acumula, Martin lembra que todo programador já disse "eu limpo isso depois"
+        ao ver a própria bagunça funcionando. A lei de LeBlanc nomeia o hábito: adiar a limpeza do código equivale,
+        na prática, a nunca fazê-la.
+      </p>
+      <div class="note">
+        <span class="tag">Nota de tradução</span>
+        Esta edição em português (Alta Books) traz a frase como <em>"Nunca é tarde"</em>, o que inverte o sentido do
+        original em inglês, <em>"Later equals never"</em> ("depois é igual a nunca"). Vale ter isso em mente ao citar
+        a passagem.
+      </div>
+    </div>
+
+    <section>
+      <span class="eyebrow">O dilema central</span>
+      <h2>Ir rápido só é possível com código limpo</h2>
+      <p>
+        Martin descreve o dilema que todo programador enfrenta: bagunça reduz a velocidade, mas a pressão do prazo
+        empurra para a bagunça. A resolução dele é direta: desorganização <em class="term">reduz</em> a velocidade
+        instantaneamente. A única forma de ir mais rápido, a única forma de cumprir o prazo, é manter o código limpo
+        o tempo todo.
+      </p>
+    </section>
+
+    <section>
+      <span class="eyebrow">Seis vozes, uma pergunta</span>
+      <h2>O que é um código limpo?</h2>
+      <p>
+        Sem uma definição única, Martin recorre a seis programadores influentes. Juntas, as respostas formam quase um
+        sumário do livro inteiro.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <p class="who">Bjarne Stroustrup</p>
+          <p class="what">criador do C++</p>
+          <p class="quote">
+            Gosto do meu código elegante e eficiente. A lógica deve ser direta... o tratamento de erro completo... O
+            código limpo faz bem apenas uma coisa.
+          </p>
+          <p class="gloss">
+            Introduz <span class="key">elegância</span>, atenção aos detalhes de erro, e a ideia de responsabilidade
+            única.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Grady Booch</p>
+          <p class="what">autor de <em>OOAD with Applications</em></p>
+          <p class="quote">
+            Um código limpo é simples e direto. Ele é tão bem legível quanto uma prosa bem escrita... repleto de
+            abstrações claras.
+          </p>
+          <p class="gloss">Foco em <span class="key">legibilidade</span>: código deve se ler como boa literatura.</p>
+        </div>
+
+        <div class="card">
+          <p class="who">"Big" Dave Thomas</p>
+          <p class="what">fundador da OTI, pai do Eclipse</p>
+          <p class="quote">
+            Um desenvolvedor pode ler e melhorar um código limpo. Ele tem testes... oferece apenas uma maneira, e não
+            várias, de se fazer uma tarefa.
+          </p>
+          <p class="gloss">
+            Acrescenta <span class="key">testes</span> e API mínima: limpo é o que outra pessoa consegue alterar com
+            segurança.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Michael Feathers</p>
+          <p class="what">autor de <em>Working Effectively with Legacy Code</em></p>
+          <p class="quote">
+            Um código limpo sempre parece que foi escrito por alguém que se importava. Não há nada de óbvio no que se
+            pode fazer para torná-lo melhor.
+          </p>
+          <p class="gloss">Resume tudo em uma palavra: <span class="key">cuidado</span> (care).</p>
+        </div>
+
+        <div class="card">
+          <p class="who">Ron Jeffries</p>
+          <p class="what">autor de <em>Extreme Programming Installed</em></p>
+          <p class="quote">
+            Regras de Beck, em ordem: passa em todos os testes; sem duplicação; expressa todas as ideias do sistema;
+            minimiza entidades.
+          </p>
+          <p class="gloss">
+            Foco em <span class="key">duplicação zero</span> e nomes/expressividade acima de tudo.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="who">Ward Cunningham</p>
+          <p class="what">criador do Wiki e coautor do XP</p>
+          <p class="quote">
+            Você sabe que está criando um código limpo quando cada rotina se mostra como o que você esperava... a
+            linguagem foi feita para o problema.
+          </p>
+          <p class="gloss">Código limpo <span class="key">nunca surpreende</span>: é previsível, quase óbvio de ler.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="callout teal">
+      <span class="law-label">A conclusão prática do capítulo</span>
+      <p class="law-statement">Deixe a área do acampamento mais limpa do que como você a encontrou.</p>
+      <p>
+        Emprestada dos escoteiros americanos, a <strong>Regra do Escoteiro</strong> é a resposta de Martin para "como
+        evitar que o código degrade de novo". Não basta escrever bem uma vez: cada vez que você toca um arquivo,
+        deixa-o um pouco melhor: renomeia uma variável, quebra uma função grande, remove uma duplicação, simplifica
+        um <code>if</code> aninhado. Pequenas melhorias contínuas, feitas por todos, impedem a degradação; para o
+        autor, é isso que separa profissionalismo de mera entrega.
+      </p>
+    </div>
+
+    <section class="synthesis">
+      <span class="eyebrow">Como as peças se encaixam</span>
+      <h2>Síntese</h2>
+      <p>
+        O capítulo monta uma cadeia de causa e efeito: código sempre existirá → código ruim tem custo real e composto
+        (Figura 1.1) → adiar a limpeza equivale a nunca limpar (Lei de LeBlanc) → logo, ir rápido de verdade exige
+        manter o código limpo o tempo todo → e "limpo" significa, nas palavras de seis autores diferentes, elegante,
+        legível, testado, sem duplicação e cuidado por alguém que se importa → o mecanismo para sustentar isso, dia
+        após dia, é a Regra do Escoteiro. É a tese fundacional sobre a qual o resto do livro constrói suas técnicas.
+      </p>
+    </section>
+
+    <footer class="colophon">
+      <span>Código Limpo, Cap. 1, pp. 1–14</span>
+      <span>Fonte: PDF do livro (edição Alta Books)</span>
+    </footer>
+  </div>
+</div>

@@ -1,0 +1,378 @@
+/* Sistema visual compartilhado pelas páginas de artigo "de leitura" do blog
+   (design com Fraunces/Literata/IBM Plex Mono, cards, callouts, etc.).
+   Cada componente que usa isso importa este arquivo com @import e aplica a
+   classe .cl-page no elemento raiz do seu template.
+
+   Fontes carregadas via <link> em src/index.html, para o Angular não tentar
+   inlinar o CSS remoto e estourar o budget por componente. */
+
+.cl-page {
+  --paper: #ffffff;
+  --paper-raised: #f7f6f3;
+  --ink: #1b1b1b;
+  --ink-soft: #5b5648;
+  --ink-faint: #8a836f;
+  --rule: #e2ded2;
+  --accent: #a93b2c;
+  --accent-soft: #c98576;
+  --teal: #2e6a5e;
+  --teal-soft: #7fab9f;
+  --shadow: 0 1px 2px rgba(35, 32, 27, 0.06), 0 6px 20px rgba(35, 32, 27, 0.06);
+
+  display: block;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Literata', Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cl-page * {
+  box-sizing: border-box;
+}
+
+.cl-page ::selection {
+  background: var(--accent-soft);
+  color: #fff;
+}
+
+.cl-page a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.cl-page a:focus-visible,
+.cl-page button:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.cl-page .back-link {
+  display: inline-block;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.cl-page .back-link:hover {
+  color: var(--accent);
+}
+
+.cl-page .page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 6rem;
+}
+
+.cl-page .eyebrow {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---------- Opener (com numeral de capítulo) ---------- */
+.cl-page header.opener {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.6rem;
+  align-items: end;
+  padding-bottom: 2.4rem;
+  margin-bottom: 2.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+.cl-page .chapter-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 380;
+  font-size: 6.4rem;
+  line-height: 0.8;
+  color: var(--accent);
+  grid-row: 1 / 3;
+}
+.cl-page header.opener h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2.6rem;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+.cl-page header.opener .book-eyebrow {
+  grid-column: 2;
+}
+.cl-page header.opener .source {
+  grid-column: 2;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.cl-page .thesis {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 480;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 3rem;
+  text-wrap: balance;
+  padding-left: 1.4rem;
+  border-left: 3px solid var(--accent);
+}
+.cl-page .thesis span {
+  color: var(--ink-soft);
+}
+
+/* ---------- Sections ---------- */
+.cl-page section {
+  margin-bottom: 3.4rem;
+}
+.cl-page section > .eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.cl-page h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+.cl-page h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin: 1.6rem 0 0.5rem;
+}
+.cl-page p {
+  margin: 0 0 1rem;
+  max-width: 66ch;
+}
+.cl-page p:last-child {
+  margin-bottom: 0;
+}
+.cl-page strong {
+  font-weight: 600;
+}
+.cl-page em.term {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.cl-page ul.plain {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  max-width: 62ch;
+}
+.cl-page ul.plain li {
+  margin-bottom: 0.4rem;
+}
+.cl-page ul.plain li::marker {
+  color: var(--accent);
+}
+
+/* ---------- Mini chart ---------- */
+.cl-page .chart-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 1.6rem;
+  align-items: center;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.4rem 1.6rem;
+  margin: 1.4rem 0 1.6rem;
+  box-shadow: var(--shadow);
+}
+.cl-page .chart-block svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.cl-page .chart-block .chart-caption {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.cl-page .chart-block .chart-caption .fig-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+@media (max-width: 560px) {
+  .cl-page .chart-block {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Law / rule callouts ---------- */
+.cl-page .callout {
+  position: relative;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: 3px;
+  padding: 1.4rem 1.6rem 1.5rem;
+  margin: 1.6rem 0;
+  box-shadow: var(--shadow);
+}
+.cl-page .callout.teal {
+  border-left-color: var(--teal);
+}
+.cl-page .callout .law-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.cl-page .callout.teal .law-label {
+  color: var(--teal);
+}
+.cl-page .callout .law-statement {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-weight: 480;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  margin: 0 0 0.9rem;
+  text-wrap: balance;
+}
+.cl-page .callout p {
+  font-size: 0.97rem;
+}
+.cl-page .callout .note {
+  margin-top: 0.9rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--rule);
+  font-size: 0.87rem;
+  color: var(--ink-soft);
+}
+.cl-page .callout .note .tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-right: 0.4em;
+}
+
+/* ---------- Definition / referência cards ---------- */
+.cl-page .cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+@media (max-width: 620px) {
+  .cl-page .cards {
+    grid-template-columns: 1fr;
+  }
+}
+.cl-page .card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.2rem 1.3rem 1.3rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+.cl-page .card .who {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 0.1rem;
+}
+.cl-page .card .what {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-bottom: 0.7rem;
+}
+.cl-page .card .quote {
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0 0 0.8rem;
+  flex-grow: 1;
+}
+.cl-page .card .quote::before {
+  content: '\201C';
+  color: var(--accent);
+}
+.cl-page .card .quote::after {
+  content: '\201D';
+  color: var(--accent);
+}
+.cl-page .card .gloss {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+}
+.cl-page .card .gloss .key {
+  color: var(--teal);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.cl-page .card.wide {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Synthesis footer ---------- */
+.cl-page .synthesis {
+  background: linear-gradient(180deg, var(--paper-raised), var(--paper));
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: var(--shadow);
+}
+.cl-page .synthesis h2 {
+  font-size: 1.4rem;
+}
+
+.cl-page footer.colophon {
+  margin-top: 3.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cl-page .card,
+  .cl-page .callout,
+  .cl-page .chart-block {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .cl-page .card:hover {
+    transform: translateY(-2px);
+  }
+}

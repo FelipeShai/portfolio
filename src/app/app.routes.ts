@@ -10,6 +10,13 @@ export const routes: Routes = [
     loadComponent: () => import('./features/blog/blog').then((m) => m.Blog),
   },
   {
+    path: 'blog/codigo-limpo-cap-01',
+    loadComponent: () =>
+      import('./features/blog/chapters/codigo-limpo-cap-01/codigo-limpo-cap-01').then(
+        (m) => m.CodigoLimpoCap01,
+      ),
+  },
+  {
     path: 'blog/:slug',
     loadComponent: () => import('./features/blog/blog-post/blog-post').then((m) => m.BlogPost),
   },
