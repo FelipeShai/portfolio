@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { Blog } from './blog';
+import { CodigoLimpoCap01 } from './codigo-limpo-cap-01';
 
-describe('Blog', () => {
-  let component: Blog;
-  let fixture: ComponentFixture<Blog>;
+describe('CodigoLimpoCap01', () => {
+  let component: CodigoLimpoCap01;
+  let fixture: ComponentFixture<CodigoLimpoCap01>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Blog],
+      imports: [CodigoLimpoCap01],
       providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Blog);
+    fixture = TestBed.createComponent(CodigoLimpoCap01);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

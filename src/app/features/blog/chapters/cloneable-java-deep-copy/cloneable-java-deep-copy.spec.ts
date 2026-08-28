@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { Blog } from './blog';
+import { CloneableJavaDeepCopy } from './cloneable-java-deep-copy';
 
-describe('Blog', () => {
-  let component: Blog;
-  let fixture: ComponentFixture<Blog>;
+describe('CloneableJavaDeepCopy', () => {
+  let component: CloneableJavaDeepCopy;
+  let fixture: ComponentFixture<CloneableJavaDeepCopy>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Blog],
+      imports: [CloneableJavaDeepCopy],
       providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Blog);
+    fixture = TestBed.createComponent(CloneableJavaDeepCopy);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
