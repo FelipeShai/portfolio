@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Education } from './components/education/education';
-import { TimelineComponent } from './components/timeline/timeline.component';
+import { Timeline } from './components/timeline/timeline';
 import { trajetoriaEducation, trajetoriaExperience } from './trajetoria.content';
 
 @Component({
   selector: 'app-trajetoria',
-  imports: [TimelineComponent, Education],
+  imports: [Timeline, Education],
   templateUrl: './trajetoria.html',
   styleUrl: './trajetoria.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

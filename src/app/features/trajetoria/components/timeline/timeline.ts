@@ -11,10 +11,10 @@ interface TimelineItem {
 
 @Component({
   selector: 'app-timeline',
-  templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css'],
+  templateUrl: './timeline.html',
+  styleUrl: './timeline.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimelineComponent {
+export class Timeline {
   readonly items = input.required<readonly TimelineItem[]>();
 }
