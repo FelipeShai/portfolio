@@ -1,0 +1,261 @@
+<div class="cl-page">
+  <a class="back-link" routerLink="/blog">← Voltar para o blog</a>
+
+  <div class="page">
+    <header class="opener">
+      <div class="chapter-num">2</div>
+      <div class="eyebrow book-eyebrow">Robert C. Martin · com Tim Ottinger</div>
+      <h1>Nomes Significativos</h1>
+      <div class="source">
+        Resumo conceitual do Capítulo 2 de <em>Código Limpo: Habilidades Práticas do Agile Software</em>.
+      </div>
+    </header>
+
+    <p class="thesis">
+      Se um nome requer um comentário,
+      <span
+        >então ele não revela seu propósito, e nomear bem é, sozinho, capaz de transformar código confuso em código
+        óbvio.</span
+      >
+    </p>
+
+    <section>
+      <span class="eyebrow">Abertura</span>
+      <h2>Nomeamos o tempo todo</h2>
+      <p>
+        Tim Ottinger abre o capítulo lembrando que há nomes por todos os lados em um software: variáveis, funções,
+        parâmetros, classes, pacotes, arquivos. Como nomeamos tanto, é melhor que façamos isso bem, e o resto do
+        capítulo é uma lista de regras simples e concretas para isso.
+      </p>
+    </section>
+
+    <section>
+      <span class="eyebrow">O exemplo que abre o capítulo</span>
+      <h2>O mesmo código, três nomes depois</h2>
+      <p>
+        Ottinger mostra como um único código pode passar de ilegível a óbvio só trocando nomes, sem mudar nem a
+        lógica, nem o número de linhas.
+      </p>
+
+      <div class="evolution">
+        <div class="snippet bad">
+          <span class="snippet-label">v1: nada revela o propósito</span>
+          <pre>public List&lt;int[]&gt; getThem() {{ '{' }}
+    List&lt;int[]&gt; list1 = new ArrayList&lt;int[]&gt;();
+    for (int[] x : theList)
+        if (x[0] == 4)
+            list1.add(x);
+    return list1;
+{{ '}' }}</pre>
+        </div>
+        <div class="arrow-between">nomes explicativos ↓</div>
+        <div class="snippet">
+          <span class="snippet-label">v2: nomes explicativos, mesma lógica</span>
+          <pre>public List&lt;int[]&gt; getFlaggedCells() {{ '{' }}
+    List&lt;int[]&gt; flaggedCells = new ArrayList&lt;int[]&gt;();
+    for (int[] cell : gameBoard)
+        if (cell[STATUS_VALUE] == FLAGGED)
+            flaggedCells.add(cell);
+    return flaggedCells;
+{{ '}' }}</pre>
+        </div>
+        <div class="arrow-between">classe própria em vez de vetor mágico ↓</div>
+        <div class="snippet good">
+          <span class="snippet-label">v3: uma classe Cell substitui os números mágicos</span>
+          <pre>public List&lt;Cell&gt; getFlaggedCells() {{ '{' }}
+    List&lt;Cell&gt; flaggedCells = new ArrayList&lt;Cell&gt;();
+    for (Cell cell : gameBoard)
+        if (cell.isFlagged())
+            flaggedCells.add(cell);
+    return flaggedCells;
+{{ '}' }}</pre>
+        </div>
+      </div>
+      <p>
+        Nada na complexidade do código mudou: mesmo número de operadores, constantes e itens aninhados. O que mudou
+        foi o quanto o código consegue responder sozinho: o que é <code>theList</code>? o que significa o índice
+        <code>0</code>? o que é o valor <code>4</code>? Nomear bem elimina a necessidade de perguntar.
+      </p>
+    </section>
+
+    <section>
+      <span class="eyebrow">O corpo do capítulo</span>
+      <h2>Dezessete regras práticas</h2>
+      <p>Ottinger organiza as regras em blocos soltos ao longo do texto. Aqui elas estão agrupadas por intenção.</p>
+
+      <div class="cluster">
+        <div class="cluster-head">
+          <span class="cluster-num">i.</span>
+          <h3>Clareza: o nome precisa se explicar sozinho</h3>
+        </div>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <p class="rule-title">Use nomes que revelem o propósito</p>
+            <p>O nome deve dizer por que existe, o que faz e como é usado. Se precisa de comentário, falhou.</p>
+            <span class="example">int d; → int elapsedTimeInDays;</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Evite informações erradas</p>
+            <p>
+              Não use palavras com significado técnico específico (hp, aix) fora de contexto, nem nomes quase
+              idênticos entre si.
+            </p>
+            <span class="example">accountList só se for List de verdade</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Faça distinções significativas</p>
+            <p>
+              Números ou palavras genéricas anexadas só para diferenciar (a1, a2, ProductInfo/Data) não comunicam
+              nada.
+            </p>
+            <span class="example">copyChars(a1, a2) → copyChars(source, destination)</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Use nomes pronunciáveis</p>
+            <p>
+              Se não dá pra falar em voz alta sem soar bobo, a comunicação em equipe sofre: programação é atividade
+              social.
+            </p>
+            <span class="example">genymdhms → generationTimestamp</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Use nomes passíveis de busca</p>
+            <p>
+              O tamanho do nome deve ser proporcional ao escopo. Constantes soltas (5, 7) são impossíveis de
+              localizar com grep.
+            </p>
+            <span class="example">5 → WORK_DAYS_PER_WEEK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <div class="cluster-head">
+          <span class="cluster-num">ii.</span>
+          <h3>Disciplina: não force o leitor a decodificar</h3>
+        </div>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <p class="rule-title">Evite codificações</p>
+            <p>
+              Notação Húngara e prefixos de tipo eram necessários com compiladores fracos; hoje só atrapalham a
+              leitura e a refatoração.
+            </p>
+            <span class="example">PhoneNumber phoneString; → PhoneNumber phone;</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Evite prefixos m_ e a notação I de interface</p>
+            <p>
+              Editores modernos já destacam campos membro; e o consumidor de uma interface não precisa saber que é
+              uma.
+            </p>
+            <span class="example">IShapeFactory → ShapeFactory (+ ShapeFactoryImp)</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Evite o mapeamento mental</p>
+            <p>
+              Nomes de uma letra (fora contadores i, j, k de escopo curto) obrigam o leitor a traduzir mentalmente.
+              Clareza é fundamental.
+            </p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Nomes de classes e métodos</p>
+            <p>
+              Classes levam substantivos (Cliente, Conta); métodos levam verbos (postarPagamento). Construtores
+              sobrecarregados viram factories nomeados.
+            </p>
+            <span class="example">new Complex(23.0) → Complex.FromRealNumber(23.0)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <div class="cluster-head">
+          <span class="cluster-num">iii.</span>
+          <h3>Consistência e contexto</h3>
+        </div>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <p class="rule-title">Não dê uma de espertinho</p>
+            <p>
+              Piadas internas e gírias só fazem sentido para quem compartilha o humor do autor. Prefira clareza a
+              diversão.
+            </p>
+            <span class="example">HolyHandGrenade → DeleteItems</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Uma palavra por conceito</p>
+            <p>
+              Escolha um termo (buscar, obter ou pegar) e mantenha-o consistente para o mesmo tipo de operação em
+              toda a base.
+            </p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Não faça trocadilhos</p>
+            <p>
+              O oposto da regra anterior: não reaproveite a mesma palavra para dois propósitos diferentes só por
+              "consistência" superficial.
+            </p>
+            <span class="example">add() só se a semântica for sempre a mesma</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Domínio da solução e do problema</p>
+            <p>
+              Use termos técnicos (AccountVisitor, JobQueue) quando fizer sentido; use o vocabulário do especialista
+              de domínio quando não houver equivalente técnico.
+            </p>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Adicione contexto significativo</p>
+            <p>
+              Variáveis soltas como number, verb e pluralModifier só fazem sentido dentro de uma classe que as
+              agrupe.
+            </p>
+            <span class="example">→ classe GuessStatisticsMessage</span>
+          </div>
+          <div class="rule-card">
+            <p class="rule-title">Não adicione contexto desnecessário</p>
+            <p>
+              Prefixar tudo com o nome do projeto (GSD) ou da aplicação atrapalha o autocompletar e não ajuda
+              ninguém.
+            </p>
+            <span class="example">GSDAccountAddress → AccountAddress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="callout teal">
+      <span class="law-label">Últimas palavras do capítulo</span>
+      <p class="law-statement">
+        O mais difícil sobre escolher bons nomes é ter boas habilidades de descrição e um histórico cultural
+        compartilhado.
+      </p>
+      <p>
+        Ottinger encerra dizendo que isso é uma questão de <strong>aprendizado</strong>, não uma habilidade técnica,
+        gerencial ou empresarial, e que a maioria das pessoas na área não pratica o suficiente. Ele também desarma o
+        medo mais comum: o de renomear algo e "incomodar" o time. Com ferramentas modernas de refatoração, renomear é
+        barato; deixar um nome ruim parado é que tem custo composto, como o capítulo 1 já havia mostrado.
+      </p>
+    </div>
+
+    <section class="synthesis">
+      <span class="eyebrow">Como as peças se encaixam</span>
+      <h2>Síntese</h2>
+      <p>
+        O capítulo prova sua tese com o próprio exemplo de abertura: o mesmo algoritmo, exatamente com a mesma
+        complexidade, passa de opaco a autoexplicativo só pela escolha dos nomes. As 17 regras que seguem não são
+        uma lista arbitrária: cada uma ataca uma forma específica de nome ruim (vago, enganoso, ambíguo,
+        impronunciável, impossível de buscar, codificado, mal contextualizado). Juntas, elas devolvem ao código a
+        característica central do Capítulo 1:
+        <em class="term">ler um código limpo deve ser como ler prosa bem escrita</em>, sem exigir do leitor nenhuma
+        tradução mental.
+      </p>
+    </section>
+
+    <footer class="colophon">
+      <span>Código Limpo, Cap. 2, pp. 17–30</span>
+      <span>Fonte: PDF do livro (edição Alta Books)</span>
+    </footer>
+  </div>
+</div>

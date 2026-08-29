@@ -296,6 +296,115 @@
   }
 }
 
+/* ---------- Code evolution blocks ---------- */
+.cl-page .evolution {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.4rem 0 1.6rem;
+}
+.cl-page .snippet {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+.cl-page .snippet .snippet-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.cl-page .snippet.bad {
+  border-left: 3px solid var(--accent);
+}
+.cl-page .snippet.bad .snippet-label {
+  color: var(--accent);
+}
+.cl-page .snippet.good {
+  border-left: 3px solid var(--teal);
+}
+.cl-page .snippet.good .snippet-label {
+  color: var(--teal);
+}
+.cl-page .snippet pre {
+  margin: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  color: var(--ink);
+}
+.cl-page .arrow-between {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Rule clusters ---------- */
+.cl-page .cluster {
+  margin-bottom: 2.2rem;
+}
+.cl-page .cluster-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+.cl-page .cluster-head .cluster-num {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+.cl-page .cluster-head h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.cl-page .rule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+@media (max-width: 620px) {
+  .cl-page .rule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cl-page .rule-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1rem 1.1rem 1.05rem;
+  box-shadow: var(--shadow);
+}
+.cl-page .rule-card .rule-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0 0 0.35rem;
+}
+.cl-page .rule-card p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: var(--ink-soft);
+  max-width: none;
+}
+.cl-page .rule-card .example {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--teal);
+}
+
 /* ---------- Mini chart ---------- */
 .cl-page .chart-block {
   display: grid;
@@ -486,12 +595,15 @@
 @media (prefers-reduced-motion: no-preference) {
   .cl-page .card,
   .cl-page .callout,
-  .cl-page .chart-block {
+  .cl-page .chart-block,
+  .cl-page .rule-card,
+  .cl-page .snippet {
     transition:
       transform 0.15s ease,
       box-shadow 0.15s ease;
   }
-  .cl-page .card:hover {
+  .cl-page .card:hover,
+  .cl-page .rule-card:hover {
     transform: translateY(-2px);
   }
 }

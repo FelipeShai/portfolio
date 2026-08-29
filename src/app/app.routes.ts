@@ -17,6 +17,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'blog/codigo-limpo-cap-02',
+    loadComponent: () =>
+      import('./features/blog/chapters/codigo-limpo-cap-02/codigo-limpo-cap-02').then(
+        (m) => m.CodigoLimpoCap02,
+      ),
+  },
+  {
     path: 'blog/cloneable-java-deep-copy',
     loadComponent: () =>
       import('./features/blog/chapters/cloneable-java-deep-copy/cloneable-java-deep-copy').then(
